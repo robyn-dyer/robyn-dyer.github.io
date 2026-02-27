@@ -411,16 +411,23 @@ footer {
   border-top: 1px solid var(--border);
   padding: 1.5rem;
   text-align: center;
-  font-size: 0.8rem;
-  color: var(--text-muted);
 }
 
-footer a {
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.footer-links a {
   color: var(--text-muted);
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
 }
 
-footer a:hover {
+.footer-links a:hover {
   color: var(--accent);
 }
 
