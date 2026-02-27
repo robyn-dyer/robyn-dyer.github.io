@@ -522,35 +522,122 @@ main {
   overflow: hidden;
 }
 
-/* Contact section */
-.contact-layout {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 2.5rem;
-  align-items: start;
+/* Hamburger toggle */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
 }
 
-.contact-tagline {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  font-weight: 300;
-  line-height: 1.7;
-  margin-bottom: 1.25rem;
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
 }
 
-.contact-linkedin {
+/* Sticky connect button */
+.connect-btn {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.6rem 1.3rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  z-index: 200;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  transition: background 0.2s;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--accent);
-  text-decoration: none;
-  transition: opacity 0.2s;
 }
 
-.contact-linkedin:hover {
-  opacity: 0.75;
+.connect-btn:hover {
+  background: #a8644a;
+}
+
+.connect-icon {
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .connect-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .connect-label {
+    display: none;
+  }
+}
+
+/* Modal */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: 300;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay.open {
+  display: flex;
+}
+
+.modal {
+  background: var(--bg);
+  border-radius: 8px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 480px;
+  margin: 1rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+.modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  line-height: 1;
+  padding: 0;
+}
+
+.modal-tagline {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  margin-bottom: 1.25rem;
 }
 
 .contact-form {
@@ -585,19 +672,46 @@ main {
 
 .form-textarea {
   resize: vertical;
-  min-height: 72px;
+  min-height: 80px;
 }
 
-.contact-form .btn {
-  align-self: flex-start;
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.contact-linkedin {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.contact-linkedin:hover {
+  opacity: 0.75;
+}
+
+.form-success {
+  font-size: 0.95rem;
+  color: #3a7a4e;
+  font-weight: 400;
+  padding: 1rem 0;
+}
+
+.form-error {
+  font-size: 0.95rem;
+  color: #a05050;
+  font-weight: 400;
+  padding: 1rem 0;
 }
 
 @media (max-width: 600px) {
-  .contact-layout {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
   .form-row {
     grid-template-columns: 1fr;
   }
@@ -630,6 +744,28 @@ footer {
 
 /* Responsive */
 @media (max-width: 600px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    padding: 1rem 1.5rem;
+    gap: 1rem;
+    z-index: 99;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
   .hero-content {
     flex-direction: column-reverse;
     align-items: flex-start;
@@ -641,6 +777,10 @@ footer {
   }
 
   .travel-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .insight-grid {
     grid-template-columns: 1fr;
   }
 
